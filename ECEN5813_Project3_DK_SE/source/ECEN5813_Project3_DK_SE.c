@@ -32,6 +32,7 @@
  * @file    ECEN5813_Project3_DK_SE.c
  * @brief   Application entry point.
  */
+#include <memtest_functions/memtest.h>
 #include <stdio.h>
 #include "board.h"
 #include "peripherals.h"
@@ -40,7 +41,11 @@
 #include "MKL25Z4.h"
 #include "fsl_debug_console.h"
 /* TODO: insert other include files here. */
-
+#include "led_control.h"
+#include "logger.h"
+#include "patterngen.h"
+#include "memtest_functions/memtest.h"
+#include "global_defines.h"
 /* TODO: insert other definitions and declarations here. */
 
 /*
