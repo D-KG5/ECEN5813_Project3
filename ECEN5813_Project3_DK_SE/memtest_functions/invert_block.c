@@ -15,6 +15,6 @@
 #include "memtest.h"
 #include "source/logger.h"
 
-void invert_block(uint8_t offset, uint8_t num_bytes){
+void invert_block(uint8_t* mem, uint8_t offset, uint8_t num_bytes){
 	//
 }

@@ -15,6 +15,6 @@
 #include "memtest.h"
 #include "source/logger.h"
 
-void display_memory(uint8_t num_bytes){
+void display_memory(uint8_t* mem, uint8_t num_bytes){
 	//
 }

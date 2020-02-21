@@ -13,6 +13,6 @@
 #include "memtest.h"
 #include "source/logger.h"
 
-void write_memory(uint8_t offset, uint8_t len, uint8_t val){
+void write_memory(uint8_t* mem, uint8_t offset, uint8_t len, uint8_t val){
 	//
 }

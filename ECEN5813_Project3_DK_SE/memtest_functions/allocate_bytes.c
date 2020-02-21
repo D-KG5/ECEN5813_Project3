@@ -15,7 +15,7 @@
 #include "memtest.h"
 #include "source/logger.h"
 
-uint8_t * allocate_bytes(uint8_t num_bytes){
+uint8_t* allocate_bytes(uint8_t num_bytes){
 	uint8_t * ret;
 	//
 	return ret;

@@ -18,7 +18,7 @@
 #include "memtest.h"
 #include "source/patterngen.h"
 
-bool compare_pattern(uint8_t num_bytes, uint8_t seed){
+bool compare_pattern(uint8_t* mem, uint8_t num_bytes, uint8_t seed){
 	bool ret = false;
 	//
 	return ret;

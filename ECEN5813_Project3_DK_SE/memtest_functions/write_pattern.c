@@ -14,6 +14,6 @@
 #include "source/logger.h"
 #include "source/patterngen.h"
 
-void write_pattern(uint8_t num_bytes, uint8_t seed){
+void write_pattern(uint8_t* mem, uint8_t num_bytes, uint8_t seed){
 	//
 }
