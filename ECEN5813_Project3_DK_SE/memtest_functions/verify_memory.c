@@ -17,8 +17,18 @@
 #include "memtest.h"
 #include "source/logger.h"
 
-bool verify_memory(void){
+mem_status_t verify_mem;
+
+bool verify_memory(uint8_t* mem){
 	bool ret = false;
-	//
+	if(mem){
+		verify_mem = MEM_SUCCESS;
+		ret = true;
+		Log_string("Allocated memory is available");
+	} else{
+		verify_mem = MEM_FAILED;
+		ret = false;
+		Log_string("Allocated memory is NOT available");
+	}
 	return ret;
 }

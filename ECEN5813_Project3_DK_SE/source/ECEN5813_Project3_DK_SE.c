@@ -34,6 +34,7 @@
  */
 #include <memtest_functions/memtest.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "board.h"
 #include "peripherals.h"
 #include "pin_mux.h"
@@ -51,6 +52,12 @@
 /*
  * @brief   Application entry point.
  */
+static void user_interaction(void){
+#ifdef USER_INTERACTION
+	getchar();
+#endif
+}
+
 int main(void) {
 
   	/* Init board hardware. */
@@ -60,7 +67,27 @@ int main(void) {
   	/* Init FSL debug console. */
     BOARD_InitDebugConsole();
 
-    PRINTF("Hello World\n");
+    // Testing logging
+    Log_enable();
+    bool status = Log_status();
+    Log_integer(status);
+    Log_string("Hello World");
+    Log_integer(23);
+
+    Log_string("Testing allocated ptr");
+    uint8_t *a1 = allocate_bytes(32);
+    Log_data(a1, 32);
+    user_interaction();
+    verify_memory(a1);
+    write_pattern(a1, 32, 0);
+    Log_data(a1, 32);
+    user_interaction();
+    free_allocated(a1);
+
+    Log_string("Testing null ptr");
+    uint8_t *a2 = NULL;
+    verify_memory(a2);
+    free_allocated(a2);
 
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;

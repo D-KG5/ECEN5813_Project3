@@ -16,5 +16,6 @@
 #include "source/logger.h"
 
 void display_memory(uint8_t* mem, uint8_t num_bytes){
+	PRINTF("0x%08X\r\n", mem);
 	//
 }

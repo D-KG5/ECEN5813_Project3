@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include "board.h"
 #include "MKL25Z4.h"
 
@@ -15,6 +16,17 @@
 #include "memtest.h"
 #include "source/logger.h"
 
-void free_allocated(void){
+mem_status_t free_alloc;
+
+void free_allocated(uint8_t* mem){
+	if(mem){
+		free(mem);
+		free_alloc = MEM_SUCCESS;
+		Log_string("Allocated memory freed");
+	} else{
+		free_alloc = MEM_FAILED;
+		Log_string("No allocated memory to free");
+	}
+
 	//
 }
