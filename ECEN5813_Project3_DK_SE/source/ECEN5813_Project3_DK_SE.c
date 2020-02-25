@@ -77,11 +77,23 @@ int main(void) {
     Log_string("Testing allocated ptr");
     uint8_t *a1 = allocate_bytes(32);
     Log_data(a1, 32);
+
     user_interaction();
     verify_memory(a1);
     write_pattern(a1, 32, 0);
     Log_data(a1, 32);
+
     user_interaction();
+    write_memory(a1, 12, 2, 0xFFEE);
+    Log_data(a1, 32);
+
+    user_interaction();
+    invert_block(a1, 9, 2);
+    Log_data(a1, 32);
+    invert_block(a1, 9, 2);
+    Log_data(a1, 32);
+    user_interaction();
+
     free_allocated(a1);
 
     Log_string("Testing null ptr");
