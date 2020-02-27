@@ -13,7 +13,7 @@
 //// macros to enable/disable logging, user interaction
 
 #define LOGGING_MODE
-#define USER_INTERACTION
+//#define USER_INTERACTION
 
 // enable/disable logging
 #ifdef LOGGING_MODE

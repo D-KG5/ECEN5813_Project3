@@ -161,6 +161,7 @@ int main(void) {
     BOARD_InitDebugConsole();
 
     LED_init();
+    LED_off(ALL);
     // Testing logging
     Log_enable();
     bool status = Log_status();

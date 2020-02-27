@@ -21,7 +21,7 @@ mem_status_t verify_mem;
 
 bool verify_memory(uint8_t* mem){
 	bool ret = false;
-	if(mem){
+	if(mem != NULL){
 		verify_mem = MEM_SUCCESS;
 		ret = true;
 		Log_string("Allocated memory is available");
