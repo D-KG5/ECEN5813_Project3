@@ -56,4 +56,9 @@ void invert_block(uint8_t* mem, uint8_t offset, uint8_t num_bytes){
 	// free intermediate array memory
 	free(inv);
 	inv_b = MEM_SUCCESS;
+	if(inv_b == MEM_SUCCESS){
+		LED_flash(GREEN);
+	} else{
+		LED_flash(RED);
+	}
 }

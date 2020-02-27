@@ -18,7 +18,7 @@
 
 mem_status_t alloc_b;
 
-uint8_t *allocate_bytes(uint8_t num_bytes){
+uint8_t* allocate_bytes(uint8_t num_bytes){
 	uint8_t *block;
 	if(num_bytes > MAX_SIZE){
 		alloc_b = MEM_FAILED;
@@ -27,6 +27,11 @@ uint8_t *allocate_bytes(uint8_t num_bytes){
 		block = (uint8_t *)malloc(num_bytes * sizeof(uint8_t));
 		alloc_b = MEM_SUCCESS;
 		Log_string("Allocating bytes success");
+	}
+	if(alloc_b == MEM_SUCCESS){
+		LED_flash(GREEN);
+	} else{
+		LED_flash(RED);
 	}
 	return block;
 }

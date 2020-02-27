@@ -30,5 +30,10 @@ bool verify_memory(uint8_t* mem){
 		ret = false;
 		Log_string("Allocated memory is NOT available");
 	}
+	if(verify_mem == MEM_SUCCESS){
+		LED_flash(GREEN);
+	} else{
+		LED_flash(RED);
+	}
 	return ret;
 }

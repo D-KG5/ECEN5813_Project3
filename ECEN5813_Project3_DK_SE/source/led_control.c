@@ -127,3 +127,10 @@ void LED_off(uint8_t color){
 		break;
 	}
 }
+
+// flash LED
+void LED_flash(uint8_t color){
+	LED_on(color);
+	Delay(1500000);
+	LED_off(color);
+}

@@ -14,5 +14,6 @@ void Delay(volatile uint32_t number);
 void LED_init(void);
 void LED_on(uint8_t color);
 void LED_off(uint8_t color);
+void LED_flash(uint8_t color);
 
 #endif /* LED_CONTROL_H_ */

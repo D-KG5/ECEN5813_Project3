@@ -19,8 +19,10 @@
 mem_status_t free_alloc;
 
 void free_allocated(uint8_t* mem){
+	// free mem and set ptr to NULL
 	if(mem){
 		free(mem);
+		mem = NULL;
 		free_alloc = MEM_SUCCESS;
 		Log_string("Allocated memory freed");
 	} else{
@@ -28,5 +30,9 @@ void free_allocated(uint8_t* mem){
 		Log_string("No allocated memory to free");
 	}
 
-	//
+	if(free_alloc == MEM_SUCCESS){
+		LED_flash(GREEN);
+	} else{
+		LED_flash(RED);
+	}
 }
