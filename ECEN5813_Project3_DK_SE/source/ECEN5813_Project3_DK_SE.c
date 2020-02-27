@@ -44,7 +44,6 @@
 /* TODO: insert other include files here. */
 #include "led_control.h"
 #include "logger.h"
-#include "patterngen.h"
 #include "memtest_functions/memtest.h"
 #include "global_defines.h"
 /* TODO: insert other definitions and declarations here. */
