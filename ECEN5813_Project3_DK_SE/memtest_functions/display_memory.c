@@ -28,12 +28,17 @@ int j = 0;
 	(byte & 0x02 ? '1' : '0'), \
 	(byte & 0x01 ? '1' : '0')
 
-void display_memory(uint8_t* mem, uint8_t num_bytes){
+void display_memory(uint8_t* mem, uint8_t num_bytes)
+{
+
+	if(num_bytes<=32)
+	{
 	uint32_t *ptr = (uint32_t*)mem;
 	int8_t index = 0;
 	int8_t b_index = 0;
 	uint8_t iter = num_bytes / 4;
-	for(index = 0; index < iter; index++){
+	for(index = 0; index < iter; index++)
+	{
 
 		PRINTF("0x%08X 0x%08X", ptr, *ptr);
 
@@ -44,6 +49,12 @@ void display_memory(uint8_t* mem, uint8_t num_bytes){
 		ptr = ((uint32_t*)ptr)+1;
 	}
 
+	}
+	else
+	{
+
+    printf("Error");
+	}
 	//
 }
 
