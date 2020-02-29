@@ -17,23 +17,32 @@
 #include "source/logger.h"
 #include "memtest.h"
 
+mem_status_t comp_m;
 bool ret = false;
 
 bool compare_pattern(uint8_t* mem, uint8_t num_bytes, uint8_t seed){
-	uint8_t* new;
-	new = (uint8_t*)malloc(num_bytes*sizeof(uint8_t));
-	new= gen_pattern(num_bytes,seed);
-	for(int i=0;i<num_bytes;i++)
-	{
-	    while(mem[i] != new[i])
-	    {
-	    	printf("False");
-	    	ret = false;
-	    	return ret;
-	    }
+	if(num_bytes <= 32){
+		uint8_t* new;
+		new = (uint8_t*)malloc(num_bytes*sizeof(uint8_t));
+		new= gen_pattern(num_bytes,seed);
+		for(int i=0;i<num_bytes;i++)
+		{
+			while(mem[i] != new[i])
+			{
+				printf("False");
+				ret = false;
+				comp_m = MEM_FAILED;
+				return ret;
+			}
+		}
+		ret = true;
+		comp_m = MEM_SUCCESS;
+		printf("True");
 	}
-	ret = true;
-	printf("True");
-	//
+	if(comp_m == MEM_SUCCESS){
+		LED_flash(GREEN);
+	} else{
+		LED_flash(RED);
+	}
 	return ret;
 }

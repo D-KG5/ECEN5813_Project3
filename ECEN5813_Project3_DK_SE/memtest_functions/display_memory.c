@@ -15,7 +15,7 @@
 #include "memtest.h"
 #include "source/logger.h"
 
-int j = 0;
+mem_status_t dis_m;
 
 #define BYTE_TO_BINARY_PATTERN " 0b%c%c%c%c%c%c%c%c"
 #define BYTE_TO_BINARY(byte) \
@@ -31,30 +31,30 @@ int j = 0;
 void display_memory(uint8_t* mem, uint8_t num_bytes)
 {
 
-	if(num_bytes<=32)
-	{
-	uint32_t *ptr = (uint32_t*)mem;
-	int8_t index = 0;
-	int8_t b_index = 0;
-	uint8_t iter = num_bytes / 4;
-	for(index = 0; index < iter; index++)
-	{
+	if(num_bytes<=32){
+		uint32_t *ptr = (uint32_t*)mem;
+		int8_t index = 0;
+		int8_t b_index = 0;
+		uint8_t iter = num_bytes / 4;
+		for(index = 0; index < iter; index++){
 
-		PRINTF("0x%08X 0x%08X", ptr, *ptr);
+			PRINTF("0x%08X 0x%08X", ptr, *ptr);
 
-		for(b_index = 3; b_index >= 0; b_index--){
-			PRINTF(BYTE_TO_BINARY_PATTERN"\t", BYTE_TO_BINARY(*(((uint8_t *)ptr) + b_index)));
+			for(b_index = 3; b_index >= 0; b_index--){
+				PRINTF(BYTE_TO_BINARY_PATTERN"\t", BYTE_TO_BINARY(*(((uint8_t *)ptr) + b_index)));
+			}
+			PRINTF("\r\n");
+			ptr = ((uint32_t*)ptr)+1;
 		}
-		PRINTF("\r\n");
-		ptr = ((uint32_t*)ptr)+1;
+		dis_m = MEM_SUCCESS;
+	} else{
+		dis_m = MEM_FAILED;
+		printf("Error");
 	}
-
+	if(dis_m == MEM_SUCCESS){
+		LED_flash(GREEN);
+	} else{
+		LED_flash(RED);
 	}
-	else
-	{
-
-    printf("Error");
-	}
-	//
 }
 
