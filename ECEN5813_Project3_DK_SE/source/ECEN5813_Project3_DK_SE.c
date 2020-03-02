@@ -82,58 +82,58 @@ struct commandStruct{
 };
 
 const struct commandStruct commands[] = {
-		{"allocate_bytes", (funcPtr_t)allocate_bytes, ""},
-		{"free_allocated", (funcPtr_t)free_allocated, ""},
-		{"verify_memory", (funcPtr_t)verify_memory, ""},
-		{"display_memory", (funcPtr_t)display_memory, ""},
-		{"write_memory", (funcPtr_t)write_memory, ""},
-		{"invert_block", (funcPtr_t)invert_block, ""},
-		{"write_pattern", (funcPtr_t)write_pattern, ""},
-		{"compare_pattern", (funcPtr_t)compare_pattern, ""},
+		{"allocate_bytes", (funcPtr_t)allocate_bytes, "allocating bytes"},
+		{"free_allocated", (funcPtr_t)free_allocated, "freeing allocated bytes"},
+		{"verify_memory", (funcPtr_t)verify_memory, "verifying memory"},
+		{"display_memory", (funcPtr_t)display_memory, "displaying memory"},
+		{"write_memory", (funcPtr_t)write_memory, "writing memory to address"},
+		{"invert_block", (funcPtr_t)invert_block, "inverting block"},
+		{"write_pattern", (funcPtr_t)write_pattern, "writing pattern"},
+		{"compare_pattern", (funcPtr_t)compare_pattern, "comparing pattern"},
 		{"", 0, ""}
 };
 
 void script_parser(uint32_t command, uint32_t arg1, uint32_t arg2, uint32_t arg3){
 	switch(command){
 	case ((uint32_t)'A'):
-		printf("A, %d\r\n", arg1);
 		Log_string(&commands[0].name[0]);
+		Log_string(&commands[0].help[0]);
 		a1 = ((alloc_b)commands[0].execute)(arg1);
 		break;
 	case ((uint32_t)'F'):
-		printf("F\r\n");
 		Log_string(&commands[1].name[0]);
+		Log_string(&commands[1].help[0]);
 		((free_alloc)commands[1].execute)(a1);
 		break;
 	case ((uint32_t)'M'):
-		printf("M\r\n");
 		Log_string(&commands[2].name[0]);
+		Log_string(&commands[2].help[0]);
 		bool ver_mem_ret = ((ver_mem)commands[2].execute)(a1);
 		Log_integer(ver_mem_ret);
 		break;
 	case ((uint32_t)'D'):
-		printf("D, %d\r\n", arg1);
 		Log_string(&commands[3].name[0]);
+		Log_string(&commands[3].help[0]);
 		((disp_mem)commands[3].execute)(a1, arg1);
 		break;
 	case ((uint32_t)'W'):
-		printf("W, %d, %d, 0x%X\r\n", arg1, arg2, arg3);
 		Log_string(&commands[4].name[0]);
+		Log_string(&commands[4].help[0]);
 		((wr_mem)commands[4].execute)(a1, arg1, arg2, arg3);
 		break;
 	case ((uint32_t)'I'):
-		printf("I, %d, %d\r\n", arg1, arg2);
 		Log_string(&commands[5].name[0]);
+		Log_string(&commands[5].help[0]);
 		((inv_blk)commands[5].execute)(a1, arg1, arg2);
 		break;
 	case ((uint32_t)'P'):
-		printf("P, %d, %d\r\n", arg1, arg2);
 		Log_string(&commands[6].name[0]);
+		Log_string(&commands[6].help[0]);
 		((wr_patt)commands[6].execute)(a1, arg1, arg2);
 		break;
 	case ((uint32_t)'C'):
-		printf("C, %d, %d\r\n", arg1, arg2);
 		Log_string(&commands[7].name[0]);
+		Log_string(&commands[7].help[0]);
 		bool comp_patt_ret = ((comp_patt)commands[7].execute)(a1, arg1, arg2);
 		Log_integer(comp_patt_ret);
 		break;
@@ -164,42 +164,11 @@ int main(void) {
     LED_off(ALL);
     // Testing logging
     Log_enable();
-    bool status = Log_status();
-    Log_integer(status);
-    Log_string("Hello World");
-    Log_integer(23);
 
     for(int i = 0; i < 21; i++){
     	script_parser(input_commands[i][0], input_commands[i][1], input_commands[i][2], input_commands[i][3]);
     	user_interaction();
     }
-
-//    Log_string("Testing allocated ptr");
-//    uint8_t *a1 = allocate_bytes(32);
-//    Log_data(a1, 32);
-//
-//    user_interaction();
-//    verify_memory(a1);
-//    write_pattern(a1, 32, 0);
-//    Log_data(a1, 32);
-//
-//    user_interaction();
-//    write_memory(a1, 12, 2, 0xFFEE);
-//    Log_data(a1, 32);
-//
-//    user_interaction();
-//    invert_block(a1, 9, 2);
-//    Log_data(a1, 32);
-//    invert_block(a1, 9, 2);
-//    Log_data(a1, 32);
-//    user_interaction();
-//
-//    free_allocated(a1);
-//
-//    Log_string("Testing null ptr");
-//    uint8_t *a2 = NULL;
-//    verify_memory(a2);
-//    free_allocated(a2);
 
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;

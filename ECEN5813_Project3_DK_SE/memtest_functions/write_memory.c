@@ -22,19 +22,20 @@ void write_memory(uint8_t* mem, uint8_t offset, uint8_t len, uint16_t val){
 	if(split == NULL){
 		mem_wr = MEM_FAILED;
 		Log_string("Write memory: split array failed to allocate");
+	}else{
+		// split value to fit uint8_t blocks
+		for(int i = len - 1; i >= 0; i--){
+			split[i] = val & 0x00FF;
+			val = (val >> 8);
+		}
+		// put it back in
+		for(int j = 0; j < len; j++){
+			mem[offset] = split[j];
+			offset++;
+		}
+		free(split);
+		mem_wr = MEM_SUCCESS;
 	}
-	// split value to fit uint8_t blocks
-	for(int i = len - 1; i >= 0; i--){
-		split[i] = val & 0x00FF;
-		val = (val >> 8);
-	}
-	// put it back in
-	for(int j = 0; j < len; j++){
-		mem[offset] = split[j];
-		offset++;
-	}
-	free(split);
-	mem_wr = MEM_SUCCESS;
 	if(mem_wr == MEM_SUCCESS){
 		LED_flash(GREEN);
 	} else{

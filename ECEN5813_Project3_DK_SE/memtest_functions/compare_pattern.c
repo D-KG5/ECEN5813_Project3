@@ -21,23 +21,23 @@ mem_status_t comp_m;
 bool ret = false;
 
 bool compare_pattern(uint8_t* mem, uint8_t num_bytes, uint8_t seed){
-	if(num_bytes <= 32){
+	if(num_bytes <= MAX_SIZE){
 		uint8_t* new;
 		new = (uint8_t*)malloc(num_bytes*sizeof(uint8_t));
 		new= gen_pattern(num_bytes,seed);
-		for(int i=0;i<num_bytes;i++)
-		{
-			while(mem[i] != new[i])
-			{
-				printf("False");
+		for(int i=0;i<num_bytes;i++){
+			while(mem[i] != new[i]){
+				Log_string("False");
 				ret = false;
-				comp_m = MEM_FAILED;
+//				comp_m = MEM_FAILED;
 				return ret;
 			}
 		}
 		ret = true;
 		comp_m = MEM_SUCCESS;
-		printf("True");
+		Log_string("True");
+	}else{
+		comp_m = MEM_FAILED;
 	}
 	if(comp_m == MEM_SUCCESS){
 		LED_flash(GREEN);

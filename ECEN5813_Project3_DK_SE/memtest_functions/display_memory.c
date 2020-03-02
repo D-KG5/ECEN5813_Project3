@@ -28,18 +28,14 @@ mem_status_t dis_m;
 	(byte & 0x02 ? '1' : '0'), \
 	(byte & 0x01 ? '1' : '0')
 
-void display_memory(uint8_t* mem, uint8_t num_bytes)
-{
-
-	if(num_bytes<=32){
+void display_memory(uint8_t* mem, uint8_t num_bytes){
+	if(num_bytes <= MAX_SIZE){
 		uint32_t *ptr = (uint32_t*)mem;
 		int8_t index = 0;
 		int8_t b_index = 0;
 		uint8_t iter = num_bytes / 4;
 		for(index = 0; index < iter; index++){
-
 			PRINTF("0x%08X 0x%08X", ptr, *ptr);
-
 			for(b_index = 3; b_index >= 0; b_index--){
 				PRINTF(BYTE_TO_BINARY_PATTERN"\t", BYTE_TO_BINARY(*(((uint8_t *)ptr) + b_index)));
 			}
@@ -49,7 +45,6 @@ void display_memory(uint8_t* mem, uint8_t num_bytes)
 		dis_m = MEM_SUCCESS;
 	} else{
 		dis_m = MEM_FAILED;
-		printf("Error");
 	}
 	if(dis_m == MEM_SUCCESS){
 		LED_flash(GREEN);
