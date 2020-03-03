@@ -29,7 +29,12 @@ bool compare_pattern(uint8_t* mem, uint8_t num_bytes, uint8_t seed){
 			while(mem[i] != new[i]){
 				Log_string("False");
 				ret = false;
-//				comp_m = MEM_FAILED;
+				comp_m = MEM_FAILED;
+				if(comp_m == MEM_SUCCESS){
+					LED_flash(GREEN);
+				} else{
+					LED_flash(RED);
+				}
 				return ret;
 			}
 		}
@@ -39,6 +44,7 @@ bool compare_pattern(uint8_t* mem, uint8_t num_bytes, uint8_t seed){
 	}else{
 		comp_m = MEM_FAILED;
 	}
+
 	if(comp_m == MEM_SUCCESS){
 		LED_flash(GREEN);
 	} else{

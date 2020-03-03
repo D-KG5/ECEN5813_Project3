@@ -20,8 +20,8 @@ mem_status_t free_alloc;
 
 void free_allocated(uint8_t* mem){
 	// free mem and set ptr to NULL
-	if(mem){
-		free(mem != NULL);
+	if(mem != NULL){
+		free(mem);
 		mem = NULL;
 		free_alloc = MEM_SUCCESS;
 		Log_string("Allocated memory freed");

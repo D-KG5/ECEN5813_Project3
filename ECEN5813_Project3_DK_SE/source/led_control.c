@@ -44,50 +44,6 @@ void LED_init(void){
 }
 
 /**
- * turn on LED by colour
- * @args unit8_t color: pass in desired color of RGB LED
- */
-void LED_on(uint8_t color){
-	// set RGB LED Pins
-	switch(color){
-	case RED:
-		PTB->PCOR = MASK(RED_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-#if DEBUG_L
-		PRINTF("RED ON\r\n");
-#endif
-		break;
-	case GREEN:
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTB->PCOR = MASK(GREEN_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-#if DEBUG_L
-		PRINTF("GREEN ON\r\n");
-#endif
-		break;
-	case BLUE:
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
-		PTD->PCOR = MASK(BLUE_LED_SHIFT);
-#if DEBUG_L
-		PRINTF("BLUE ON\r\n");
-#endif
-		break;
-	case ALL:
-		PTB->PCOR = MASK(RED_LED_SHIFT);
-		PTB->PCOR = MASK(GREEN_LED_SHIFT);
-		PTD->PCOR = MASK(BLUE_LED_SHIFT);
-#if DEBUG_L
-		PRINTF("ALL ON\r\n");
-#endif
-		break;
-	default:
-		PRINTF("Error turning on LED\r\n");
-	}
-}
-
-/**
  * turn off LED by colour
  * @args unit8_t color: pass in desired color of RGB LED
  */
@@ -125,6 +81,51 @@ void LED_off(uint8_t color){
 		PRINTF("Error turning off LED\r\n");
 #endif
 		break;
+	}
+}
+
+/**
+ * turn on LED by colour
+ * @args unit8_t color: pass in desired color of RGB LED
+ */
+void LED_on(uint8_t color){
+	// set RGB LED Pins
+	LED_off(ALL);
+	switch(color){
+	case RED:
+		PTB->PCOR = MASK(RED_LED_SHIFT);
+		PTB->PSOR = MASK(GREEN_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+#if DEBUG_L
+		PRINTF("RED ON\r\n");
+#endif
+		break;
+	case GREEN:
+		PTB->PSOR = MASK(RED_LED_SHIFT);
+		PTB->PCOR = MASK(GREEN_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+#if DEBUG_L
+		PRINTF("GREEN ON\r\n");
+#endif
+		break;
+	case BLUE:
+		PTB->PSOR = MASK(RED_LED_SHIFT);
+		PTB->PSOR = MASK(GREEN_LED_SHIFT);
+		PTD->PCOR = MASK(BLUE_LED_SHIFT);
+#if DEBUG_L
+		PRINTF("BLUE ON\r\n");
+#endif
+		break;
+	case ALL:
+		PTB->PCOR = MASK(RED_LED_SHIFT);
+		PTB->PCOR = MASK(GREEN_LED_SHIFT);
+		PTD->PCOR = MASK(BLUE_LED_SHIFT);
+#if DEBUG_L
+		PRINTF("ALL ON\r\n");
+#endif
+		break;
+	default:
+		PRINTF("Error turning on LED\r\n");
 	}
 }
 

@@ -166,6 +166,7 @@ int main(void) {
     Log_enable();
 
     for(int i = 0; i < 21; i++){
+    	LED_on(BLUE);
     	script_parser(input_commands[i][0], input_commands[i][1], input_commands[i][2], input_commands[i][3]);
     	user_interaction();
     }

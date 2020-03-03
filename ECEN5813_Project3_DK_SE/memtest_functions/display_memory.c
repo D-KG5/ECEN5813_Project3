@@ -43,11 +43,14 @@ void display_memory(uint8_t* mem, uint8_t num_bytes){
 			ptr = ((uint32_t*)ptr)+1;
 		}
 		dis_m = MEM_SUCCESS;
+		Log_data(mem, 32);
 	} else{
-		printf("Error");
-		printf("\n\r");
+//		printf("Error");
+//		printf("\n\r");
+		Log_string("Out of range");
 		dis_m = MEM_FAILED;
 	}
+
 	if(dis_m == MEM_SUCCESS){
 		LED_flash(GREEN);
 	} else{
