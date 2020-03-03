@@ -10,7 +10,7 @@
 
 #include "fsl_debug_console.h"
 
-//// macros to enable/disable logging, user interaction
+// macros to enable/disable logging, user interaction
 
 #define LOGGING_MODE
 //#define USER_INTERACTION
