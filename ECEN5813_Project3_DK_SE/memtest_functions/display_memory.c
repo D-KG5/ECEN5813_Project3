@@ -44,6 +44,8 @@ void display_memory(uint8_t* mem, uint8_t num_bytes){
 		}
 		dis_m = MEM_SUCCESS;
 	} else{
+		printf("Error");
+		printf("\n\r");
 		dis_m = MEM_FAILED;
 	}
 	if(dis_m == MEM_SUCCESS){
